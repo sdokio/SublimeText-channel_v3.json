@@ -42,7 +42,7 @@ import urllib2,os,hashlib; h = '6f4c264a24d933ce70df5dedcf1dcaee' + 'ebe013ee18c
   1. 添加 `"channels": ["https://raw.githubusercontent.com/sdokio/channel_v3_daily/master/channel_v3.json"],` 后保存即可
 ```json
 {
-	"bootstrapped": true,
+  "bootstrapped": true,
 	"channels":
 	[
 		"https://raw.githubusercontent.com/sdokio/channel_v3_daily/master/channel_v3.json"
