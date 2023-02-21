@@ -39,13 +39,31 @@
 
 #### 在线使用
 
-1. 通过菜单 `Preferences` > `Package Settings` > `Package Control` > `Settings - User` 打开自定义配置文件
+1. 通过菜单 `Preferences` > `Package Settings` > `Package Control` > `Settings` 打开自定义配置文件
 2. 添加 `"channels": ["https://raw.githubusercontent.com/sdokio/channel_v3_daily/master/channel_v3.json"],` 后保存即可
+```json
+{
+	"bootstrapped": true,
+	"channels":
+	[
+		"https://raw.githubusercontent.com/sdokio/channel_v3_daily/master/channel_v3.json"
+	],
+	"in_process_packages":
+	[
+	],
+	"installed_packages":
+	[
+		"ConvertToUTF8",
+		"Package Control"
+	]
+}
+```
+
 
 #### 离线使用（不建议，因为此刻之后的插件更新信息需要重新完成以下步骤）
 
 1. 下载 [channel_v3.json](https://github.com/sdokio/channel_v3_daily/raw/master/channel_v3.json) 到本地，如 **C:\Users\Administrator\Downloads\channel_v3.json**
-2. 通过菜单 `Preferences` > `Package Settings` > `Package Control` > `Settings - User` 打开自定义配置文件
+2. 通过菜单 `Preferences` > `Package Settings` > `Package Control` > `Settings` 打开自定义配置文件
 3. 添加 `"channels": ["C:\Users\Administrator\Downloads\channel_v3.json"],` 后保存即可
 
 完成换源后即可重新尝试唤起 `Package Control: Install Package` 搜索插件了。
