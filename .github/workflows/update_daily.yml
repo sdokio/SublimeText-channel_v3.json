@@ -16,6 +16,9 @@ concurrency:
 jobs:
   # 自动拉取最新channel_v3.json（每日13:14 UTC+8触发）
   GET-LATEST-channel_v3_json:
+    concurrency:
+      group: ${{ github.ref }}
+      cancel-in-progress: true
     if: github.event.schedule != '24 5 1 * *'
     runs-on: ubuntu-latest
     steps:
@@ -39,6 +42,9 @@ jobs:
 
   # 自动拉取最新Package Control.sublime-package（每月1日13:24 UTC+8触发）
   GET-LATEST-Package-Control_sublime-package:
+    concurrency:
+      group: ${{ github.ref }}
+      cancel-in-progress: true
     if: github.event.schedule != '14 5 * * *'
     runs-on: ubuntu-latest
     steps:
