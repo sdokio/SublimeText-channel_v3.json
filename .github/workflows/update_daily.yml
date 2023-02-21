@@ -24,12 +24,17 @@ jobs:
           fetch-depth: 0 # otherwise, there would be errors pushing refs to the destination repository.
       - name: 2.拉取最新channel_v3.json文件到当前目录
         run: curl -o ./channel_v3.json https://packagecontrol.io/channel_v3.json
-      - name: 3.提交变更
+      - name: 3.判断是否有变更
+        id: determine_changes
+        uses: UnicornGlobal/has-changes-action@v1.0.11
+      - name: 4.提交变更
+        if: steps.determine_changes.outputs.changed == 1
         run: |
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
           git commit -a -m "Github-Actions: file [channel_v3.json] updated at $(date +'%Y-%m-%d %H:%M:%S')"
-      - name: 4.推送到远程仓库
+      - name: 5.推送到远程仓库
+        if: steps.determine_changes.outputs.changed == 1
         uses: ad-m/github-push-action@master
         with:
           github_token: ${{ secrets.GH_ACCESS_TOKEN }}
@@ -50,12 +55,17 @@ jobs:
           fetch-depth: 0 # otherwise, there would be errors pushing refs to the destination repository.
       - name: 2.拉取最新channel_v3.json文件到当前目录
         run: curl -o "./Package Control.sublime-package" https://packagecontrol.io/Package%20Control.sublime-package
-      - name: 3.提交变更
+      - name: 3.判断是否有变更
+        id: determine_changes
+        uses: UnicornGlobal/has-changes-action@v1.0.11
+      - name: 4.提交变更
+        if: steps.determine_changes.outputs.changed == 1
         run: |
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
           git commit -a -m "Github-Actions: file [Package Control.sublime-package] updated at $(date +'%Y-%m-%d %H:%M:%S')"
-      - name: 4.推送到远程仓库
+      - name: 5.推送到远程仓库
+        if: steps.determine_changes.outputs.changed == 1
         uses: ad-m/github-push-action@master
         with:
           github_token: ${{ secrets.GH_ACCESS_TOKEN }}
