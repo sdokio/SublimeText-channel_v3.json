@@ -1,4 +1,4 @@
-name: 自动拉取最新channel_v3.json及自动拉取最新Package Control.sublime-package
+name: 自动拉取最新文件
 
 on:
   workflow_dispatch:
