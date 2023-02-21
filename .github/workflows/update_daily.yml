@@ -1,0 +1,55 @@
+name: 自动拉取最新channel_v3.json及自动拉取最新Package Control.sublime-package
+
+on:
+  schedule:
+    # 每日13:14 UTC+8
+    - cron: '14 5 * * *'
+    # 每月1日13:24 UTC+8
+    - cron: '24 5 1 * *'
+
+jobs:
+  # 自动拉取最新channel_v3.json（每日13:14 UTC+8触发）
+  get-latest-channel_v3.json:
+    if: github.event.schedule != '24 5 1 * *'
+    runs-on: ubuntu-latest
+    steps:
+      - name: 1.拉取仓库内容
+        uses: actions/checkout@v2
+        with:
+          persist-credentials: false # otherwise, the token used is the GITHUB_TOKEN, instead of your personal access token.
+          fetch-depth: 0 # otherwise, there would be errors pushing refs to the destination repository.
+      - name: 2.拉取最新channel_v3.json文件到当前目录
+        run: curl -o ./channel_v3.json https://packagecontrol.io/channel_v3.json
+      - name: 3.提交变更
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git commit -a -m "Github-Actions: file [channel_v3.json] updated at $(date +'%Y-%m-%d %H:%M:%S')"
+      - name: 4.并推送到远程仓库
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GH_ACCESS_TOKEN }}
+          branch: ${{ github.ref }}
+
+  # 自动拉取最新Package Control.sublime-package（每月1日13:24 UTC+8触发）
+  get-latest-Package-Control.sublime-package:
+    if: github.event.schedule != '14 5 * * *'
+    runs-on: ubuntu-latest
+    steps:
+      - name: 1.拉取仓库内容
+        uses: actions/checkout@v2
+        with:
+          persist-credentials: false # otherwise, the token used is the GITHUB_TOKEN, instead of your personal access token.
+          fetch-depth: 0 # otherwise, there would be errors pushing refs to the destination repository.
+      - name: 2.拉取最新channel_v3.json文件到当前目录
+        run: curl -o "./Package Control.sublime-package" https://packagecontrol.io/Package%20Control.sublime-package
+      - name: 3.提交变更
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git commit -a -m "Github-Actions: file [Package Control.sublime-package] updated at $(date +'%Y-%m-%d %H:%M:%S')"
+      - name: 4.并推送到远程仓库
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GH_ACCESS_TOKEN }}
+          branch: ${{ github.ref }}
