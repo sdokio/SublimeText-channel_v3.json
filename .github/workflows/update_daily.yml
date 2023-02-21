@@ -1,6 +1,7 @@
 name: 自动拉取最新channel_v3.json及自动拉取最新Package Control.sublime-package
 
 on:
+  workflow_dispatch:
   schedule:
     # 每日13:14 UTC+8
     - cron: '14 5 * * *'
@@ -9,7 +10,7 @@ on:
 
 jobs:
   # 自动拉取最新channel_v3.json（每日13:14 UTC+8触发）
-  get-latest-channel_v3.json:
+  GET-LATEST-channel_v3_json:
     if: github.event.schedule != '24 5 1 * *'
     runs-on: ubuntu-latest
     steps:
@@ -32,7 +33,7 @@ jobs:
           branch: ${{ github.ref }}
 
   # 自动拉取最新Package Control.sublime-package（每月1日13:24 UTC+8触发）
-  get-latest-Package-Control.sublime-package:
+  GET-LATEST-Package-Control_sublime-package:
     if: github.event.schedule != '14 5 * * *'
     runs-on: ubuntu-latest
     steps:
