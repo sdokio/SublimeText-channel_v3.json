@@ -1,19 +1,19 @@
-name: 自动拉取最新文件
+name: 定时拉取最新文件存至本仓
 
 on:
-  workflow_dispatch:
+  workflow_dispatch: # 添加手动运行按钮
   schedule:
-    # 每日13:14 UTC+8
+    # 每日 13:14 UTC+8 运行一次
     - cron: '14 5 * * *'
-    # 每月1日13:24 UTC+8
+    # 每月1日 13:24 UTC+8 运行一次
     - cron: '24 5 1 * *'
 
 jobs:
-  # 自动拉取最新channel_v3.json（每日13:14 UTC+8触发）
-  GET-LATEST-channel_v3_json:
+  # 自动拉取最新channel_v3.json
+  FETCH-channel_v3_json:
     concurrency:
       group: ${{ github.ref }}
-      cancel-in-progress: false
+      cancel-in-progress: false # To cancel any previously pending (or currently running) job or workflow in the same concurrency group
     if: github.event.schedule != '24 5 1 * *'
     runs-on: ubuntu-latest
     steps:
@@ -40,8 +40,8 @@ jobs:
           github_token: ${{ secrets.GH_ACCESS_TOKEN }}
           branch: ${{ github.ref }}
 
-  # 自动拉取最新Package Control.sublime-package（每月1日13:24 UTC+8触发）
-  GET-LATEST-Package-Control_sublime-package:
+  # 自动拉取最新Package Control.sublime-package
+  FETCH-Package-Control_sublime-package:
     concurrency:
       group: ${{ github.ref }}
       cancel-in-progress: false
