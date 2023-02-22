@@ -2,9 +2,9 @@
 
 ## ■ 用途
 
-使用 Sublime Text 时，有时需要下载插件以丰富编辑器功能，这就需要用到官方组件 `Package Control` （可理解为包管理器，类似apt/dpkg之于Ubuntu/Debian、rpm之于RedHat、yum之于CentOS、pip之于Python、npm之于Node.js），但该组件默认是没有安装的，然而安装需要访问 Sublime Text 官网。然后，即使安装了 `Package Control` 组件，在使用该组件搜索插件时也需要访问 Sublime Text 官网。但国内网络无法访问其官网，那么下载插件也就无从谈起。
+使用 Sublime Text 时，有时需要下载插件以丰富编辑器功能，这需要用到官方组件 `Package Control` （可理解为包管理器，类似apt/dpkg之于Ubuntu/Debian、rpm之于RedHat、yum之于CentOS、pip之于Python、npm之于Node.js），但该组件默认是没有安装的，而安装需要访问 Sublime Text 官网，但国内网络无法访问。其次，即使用其他办法安装了 `Package Control` 组件，在使用该组件搜索插件时也需要访问 Sublime Text 官网，还是国内网络无法访问的问题。所以，下载插件也就无从谈起。
 
-本项目借助 Github Actions 从 Sublime Text 官网获取最新 `channel_v3.json`（每天检查1次是否更新）和最新 `Package Control` (每月检查1次是否更新)，然后存放到本仓库，以便于国内网络访问。至于有偶尔访问 Github 也会抽抽，后续可以考虑用国内的 Gitee 定时copy本仓库，以彻底解决访问困难的问题。
+本项目借助 Github Actions 从 Sublime Text 官定期网获取最新 `channel_v3.json`（每天检查1次是否更新）和最新 `Package Control` (每月检查1次是否更新)，然后存放到本仓库，以便于国内网络访问。至于访问 Github 偶尔也会抽抽，后续可以考虑使用国内的 Gitee 定时copy本仓库功能，以彻底解决访问困难的问题。
 
 ## ■ 用法
 
