@@ -65,5 +65,7 @@ import urllib2,os,hashlib; h = '6f4c264a24d933ce70df5dedcf1dcaee' + 'ebe013ee18c
   1. 通过菜单 `Preferences` > `Package Settings` > `Package Control` > `Settings` 打开自定义配置文件
   1. 添加 `"channels": ["C:\Users\Administrator\Downloads\channel_v3.json"],` 后保存即可
 
-  完成换源后即可使用快捷键 `Ctrl`+`Shift`+`P` 调用 `Package Control: Install Package` ，然后就可以愉快地搜索/下载插件了。
+### ● 安装插件
+
+  完成换源后即可使用快捷键 `Ctrl`+`Shift`+`P` 调用 `Package Control: Install Package` ，然后就可以愉快地搜索/安装插件了。
 
