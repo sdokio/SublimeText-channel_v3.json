@@ -26,15 +26,15 @@ jobs:
         run: curl -o ./channel_v3.json https://packagecontrol.io/channel_v3.json
       - name: 3.判断是否有变更
         id: determine_changes
-        uses: UnicornGlobal/has-changes-action@v1.0.11
+        run: echo "changed=$(git status --porcelain | wc -l)" >> $GITHUB_OUTPUT
       - name: 4.提交变更
-        if: steps.determine_changes.outputs.changed == 1
+        if: steps.determine_changes.outputs.changed != 0
         run: |
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
           git commit -a -m "Github-Actions: file [channel_v3.json] updated at $(date +'%Y-%m-%d %H:%M:%S')"
       - name: 5.推送到远程仓库
-        if: steps.determine_changes.outputs.changed == 1
+        if: steps.determine_changes.outputs.changed != 0
         uses: ad-m/github-push-action@master
         with:
           github_token: ${{ secrets.GH_ACCESS_TOKEN }}
