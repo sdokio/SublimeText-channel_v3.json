@@ -42,11 +42,7 @@ jobs:
           branch: ${{ github.ref }}
       - name: 6.发送一个Gotify推送消息
         if: steps.determine_changes.outputs.changed != 0
-        run: |
-          curl "http://sdokio.cn:21117/message?token=A30hJV1xtqV1U_k" 
-          -F "title=更新提醒" 
-          -F "message=channel_v3.json文件有更新，已拉取到仓库sdokio/channel_v3_daily" 
-          -F "priority=3"
+        run: curl "http://sdokio.cn:21117/message?token=A30hJV1xtqV1U_k" -F "title=更新提醒" -F "message=channel_v3.json文件有更新，已拉取到仓库sdokio/channel_v3_daily" -F "priority=3"
 
   # 自动拉取最新Package Control.sublime-package
   FETCH-Package-Control_sublime-package:
@@ -81,8 +77,4 @@ jobs:
           branch: ${{ github.ref }}
       - name: 6.发送一个Gotify推送消息
         if: steps.determine_changes.outputs.changed != 0
-        run: |
-          curl "http://sdokio.cn:21117/message?token=A30hJV1xtqV1U_k" 
-          -F "title=更新提醒" 
-          -F "message=Control.sublime-package文件有更新，已拉取到仓库sdokio/channel_v3_daily" 
-          -F "priority=3"
+        run: curl "http://sdokio.cn:21117/message?token=A30hJV1xtqV1U_k" -F "title=更新提醒" -F "message=Control.sublime-package文件有更新，已拉取到仓库sdokio/channel_v3_daily" -F "priority=3"
