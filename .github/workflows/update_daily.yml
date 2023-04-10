@@ -32,12 +32,12 @@ jobs:
       - name: 3.判断是否有变更
         id: determine_changes
         run: echo "changed=$(git status --porcelain | wc -l)" >> $GITHUB_OUTPUT
-      - name: 4.提交变更
-        if: steps.determine_changes.outputs.changed != 0
-        run: |
-          git config --local user.email "github-actions[bot]@users.noreply.github.com"
-          git config --local user.name "github-actions[bot]"
-          git commit -a -m "Github-Actions: file [channel_v3.json] updated at $(date +'%Y-%m-%d %H:%M:%S')"
+#       - name: 4.提交变更
+#         if: steps.determine_changes.outputs.changed != 0
+#         run: |
+#           git config --local user.email "github-actions[bot]@users.noreply.github.com"
+#           git config --local user.name "github-actions[bot]"
+#           git commit -a -m "Github-Actions: file [channel_v3.json] updated at $(date +'%Y-%m-%d %H:%M:%S')"
       - name: 5.推送到远程仓库
         if: steps.determine_changes.outputs.changed != 0
         uses: stefanzweifel/git-auto-commit-action@v4
@@ -72,12 +72,12 @@ jobs:
       - name: 3.判断是否有变更
         id: determine_changes
         uses: UnicornGlobal/has-changes-action@v1.0.11
-      - name: 4.提交变更
-        if: steps.determine_changes.outputs.changed == 1
-        run: |
-          git config --local user.email "github-actions[bot]@users.noreply.github.com"
-          git config --local user.name "github-actions[bot]"
-          git commit -a -m "Github-Actions: file [Package Control.sublime-package] updated at $(date +'%Y-%m-%d %H:%M:%S')"
+#       - name: 4.提交变更
+#         if: steps.determine_changes.outputs.changed == 1
+#         run: |
+#           git config --local user.email "github-actions[bot]@users.noreply.github.com"
+#           git config --local user.name "github-actions[bot]"
+#           git commit -a -m "Github-Actions: file [Package Control.sublime-package] updated at $(date +'%Y-%m-%d %H:%M:%S')"
       - name: 5.推送到远程仓库
         if: steps.determine_changes.outputs.changed == 1
         uses: stefanzweifel/git-auto-commit-action@v4
