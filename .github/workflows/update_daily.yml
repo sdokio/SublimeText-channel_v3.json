@@ -36,10 +36,15 @@ jobs:
           git commit -a -m "Github-Actions: file [channel_v3.json] updated at $(date +'%Y-%m-%d %H:%M:%S')"
       - name: 5.推送到远程仓库
         if: steps.determine_changes.outputs.changed != 0
-        uses: ad-m/github-push-action@master
-        with:
-          github_token: ${{ secrets.GH_ACCESS_TOKEN }}
-          branch: ${{ github.ref }}
+        run: |
+          git config --global user.name 'sdokio'
+          git config --global user.email 'sdokio@users.noreply.github.com'
+          git commit -am "channel_v3.json文件有更新，已拉取到仓库sdokio/channel_v3_daily"
+          git push
+#         uses: ad-m/github-push-action@master
+#         with:
+#          github_token: ${{ secrets.GH_ACCESS_TOKEN }}
+#          branch: ${{ github.ref }}
       - name: 6.发送一个Gotify推送消息
         if: steps.determine_changes.outputs.changed != 0
         run: curl "http://sdokio.cn:21117/message?token=A30hJV1xtqV1U_k" -F "title=更新提醒" -F "message=channel_v3.json文件有更新，已拉取到仓库sdokio/channel_v3_daily" -F "priority=3"
@@ -71,10 +76,15 @@ jobs:
           git commit -a -m "Github-Actions: file [Package Control.sublime-package] updated at $(date +'%Y-%m-%d %H:%M:%S')"
       - name: 5.推送到远程仓库
         if: steps.determine_changes.outputs.changed == 1
-        uses: ad-m/github-push-action@master
-        with:
-          github_token: ${{ secrets.GH_ACCESS_TOKEN }}
-          branch: ${{ github.ref }}
+        run: |
+          git config --global user.name 'sdokio'
+          git config --global user.email 'sdokio@users.noreply.github.com'
+          git commit -am "Control.sublime-package文件有更新，已拉取到仓库sdokio/channel_v3_daily"
+          git push
+#         uses: ad-m/github-push-action@master
+#         with:
+#           github_token: ${{ secrets.GH_ACCESS_TOKEN }}
+#           branch: ${{ github.ref }}
       - name: 6.发送一个Gotify推送消息
         if: steps.determine_changes.outputs.changed != 0
         run: curl "http://sdokio.cn:21117/message?token=A30hJV1xtqV1U_k" -F "title=更新提醒" -F "message=Control.sublime-package文件有更新，已拉取到仓库sdokio/channel_v3_daily" -F "priority=3"
