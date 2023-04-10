@@ -17,8 +17,7 @@ jobs:
     if: github.event.schedule != '24 5 1 * *'
     runs-on: ubuntu-latest
     permissions:
-      # Give the default GITHUB_TOKEN write permission to commit and push the
-      # added or changed files to the repository.
+      # Give the default GITHUB_TOKEN write permission to commit and push the added or changed files to the repository.
       contents: write
     timeout-minutes: 5
     steps:
@@ -32,19 +31,15 @@ jobs:
       - name: 3.判断是否有变更
         id: determine_changes
         run: echo "changed=$(git status --porcelain | wc -l)" >> $GITHUB_OUTPUT
-#       - name: 4.提交变更
-#         if: steps.determine_changes.outputs.changed != 0
-#         run: |
-#           git config --local user.email "github-actions[bot]@users.noreply.github.com"
-#           git config --local user.name "github-actions[bot]"
-#           git commit -a -m "Github-Actions: file [channel_v3.json] updated at $(date +'%Y-%m-%d %H:%M:%S')"
+      - name: 4.提交变更
+        if: steps.determine_changes.outputs.changed != 0
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git commit -a -m "Github-Actions: file [channel_v3.json] updated at $(date +'%Y-%m-%d %H:%M:%S')"
       - name: 5.推送到远程仓库
         if: steps.determine_changes.outputs.changed != 0
         uses: stefanzweifel/git-auto-commit-action@v4
-#         uses: ad-m/github-push-action@master
-#         with:
-#          github_token: ${{ secrets.GH_ACTION_TOKEN }}
-#          branch: ${{ github.ref }}
       - name: 6.发送一个Gotify推送消息
         if: steps.determine_changes.outputs.changed != 0
         run: curl "http://sdokio.cn:21117/message?token=A30hJV1xtqV1U_k" -F "title=更新提醒" -F "message=channel_v3.json文件有更新，已拉取到仓库sdokio/channel_v3_daily" -F "priority=3"
@@ -57,8 +52,7 @@ jobs:
     if: github.event.schedule != '14 5 * * *'
     runs-on: ubuntu-latest
     permissions:
-      # Give the default GITHUB_TOKEN write permission to commit and push the
-      # added or changed files to the repository.
+      # Give the default GITHUB_TOKEN write permission to commit and push the added or changed files to the repository.
       contents: write
     timeout-minutes: 5
     steps:
@@ -72,19 +66,15 @@ jobs:
       - name: 3.判断是否有变更
         id: determine_changes
         uses: UnicornGlobal/has-changes-action@v1.0.11
-#       - name: 4.提交变更
-#         if: steps.determine_changes.outputs.changed == 1
-#         run: |
-#           git config --local user.email "github-actions[bot]@users.noreply.github.com"
-#           git config --local user.name "github-actions[bot]"
-#           git commit -a -m "Github-Actions: file [Package Control.sublime-package] updated at $(date +'%Y-%m-%d %H:%M:%S')"
+      - name: 4.提交变更
+        if: steps.determine_changes.outputs.changed == 1
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git commit -a -m "Github-Actions: file [Package Control.sublime-package] updated at $(date +'%Y-%m-%d %H:%M:%S')"
       - name: 5.推送到远程仓库
         if: steps.determine_changes.outputs.changed == 1
         uses: stefanzweifel/git-auto-commit-action@v4
-#         uses: ad-m/github-push-action@master
-#         with:
-#           github_token: ${{ secrets.GH_ACTION_TOKEN }}
-#           branch: ${{ github.ref }}
       - name: 6.发送一个Gotify推送消息
         if: steps.determine_changes.outputs.changed != 0
         run: curl "http://sdokio.cn:21117/message?token=A30hJV1xtqV1U_k" -F "title=更新提醒" -F "message=Control.sublime-package文件有更新，已拉取到仓库sdokio/channel_v3_daily" -F "priority=3"
