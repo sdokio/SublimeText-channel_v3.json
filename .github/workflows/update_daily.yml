@@ -16,6 +16,10 @@ jobs:
       cancel-in-progress: false # To cancel any previously pending (or currently running) job or workflow in the same concurrency group
     if: github.event.schedule != '24 5 1 * *'
     runs-on: ubuntu-latest
+    permissions:
+      # Give the default GITHUB_TOKEN write permission to commit and push the
+      # added or changed files to the repository.
+      contents: write
     timeout-minutes: 5
     steps:
       - name: 1.拉取仓库内容
@@ -51,6 +55,10 @@ jobs:
       cancel-in-progress: false
     if: github.event.schedule != '14 5 * * *'
     runs-on: ubuntu-latest
+    permissions:
+      # Give the default GITHUB_TOKEN write permission to commit and push the
+      # added or changed files to the repository.
+      contents: write
     timeout-minutes: 5
     steps:
       - name: 1.拉取仓库内容
