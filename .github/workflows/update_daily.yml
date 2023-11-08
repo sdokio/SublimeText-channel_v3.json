@@ -51,7 +51,7 @@ jobs:
           password: ${{secrets.GMAIL_APP_PWD}}
           subject: Github Actions job result
           to: zdqdj@qq.com
-          from: Soya Dokio
+          from: SoyaDokio
           body: ${{github.repository}} - channel_v3.json文件有更新，已拉取到仓库sdokio/channel_v3_daily
 
   # 自动拉取最新Package Control.sublime-package
@@ -96,5 +96,5 @@ jobs:
           password: ${{secrets.GMAIL_APP_PWD}}
           subject: Github Actions job result
           to: zdqdj@qq.com
-          from: Soya Dokio
+          from: SoyaDokio
           body: ${{github.repository}} - Control.sublime-package文件有更新，已拉取到仓库sdokio/channel_v3_daily
