@@ -40,9 +40,19 @@ jobs:
       - name: 5.推送到远程仓库
         if: steps.determine_changes.outputs.changed != 0
         uses: stefanzweifel/git-auto-commit-action@v4
-      - name: 6.发送一个Gotify推送消息
+      - name: 6.发送一个 Email 提醒
         if: steps.determine_changes.outputs.changed != 0
-        run: curl "http://sdokio.cn:21117/message?token=A30hJV1xtqV1U_k" -F "title=更新提醒" -F "message=channel_v3.json文件有更新，已拉取到仓库sdokio/channel_v3_daily" -F "priority=3"
+        uses: dawidd6/action-send-mail@v3
+        with: 
+          server_address: smtp.gmail.com
+          server_port: 465
+          secure: true
+          username: soyadokio@gmail.com
+          password: ${{secrets.GMAIL_APP_PWD}}
+          subject: Github Actions job result
+          to: zdqdj@qq.com
+          from: Soya Dokio
+          body: ${{github.repository}} - channel_v3.json文件有更新，已拉取到仓库sdokio/channel_v3_daily
 
   # 自动拉取最新Package Control.sublime-package
   FETCH-Package-Control_sublime-package:
@@ -75,6 +85,16 @@ jobs:
       - name: 5.推送到远程仓库
         if: steps.determine_changes.outputs.changed == 1
         uses: stefanzweifel/git-auto-commit-action@v4
-      - name: 6.发送一个Gotify推送消息
+      - name: 6.发送一个 Email 提醒
         if: steps.determine_changes.outputs.changed != 0
-        run: curl "http://sdokio.cn:21117/message?token=A30hJV1xtqV1U_k" -F "title=更新提醒" -F "message=Control.sublime-package文件有更新，已拉取到仓库sdokio/channel_v3_daily" -F "priority=3"
+        uses: dawidd6/action-send-mail@v3
+        with: 
+          server_address: smtp.gmail.com
+          server_port: 465
+          secure: true
+          username: soyadokio@gmail.com
+          password: ${{secrets.GMAIL_APP_PWD}}
+          subject: Github Actions job result
+          to: zdqdj@qq.com
+          from: Soya Dokio
+          body: ${{github.repository}} - Control.sublime-package文件有更新，已拉取到仓库sdokio/channel_v3_daily
