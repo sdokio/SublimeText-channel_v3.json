@@ -14,6 +14,7 @@ jobs:
     concurrency:
       group: ${{ github.ref }}
       cancel-in-progress: false # To cancel any previously pending (or currently running) job or workflow in the same concurrency group
+    if: github.event.schedule == '14 5 * * *' # 北京时间 每天13:14
     runs-on: ubuntu-latest
     permissions:
       # Give the default GITHUB_TOKEN write permission to commit and push the added or changed files to the repository.
@@ -29,12 +30,9 @@ jobs:
         run: curl -o ./channel_v3.json https://packagecontrol.io/channel_v3.json
       - name: 3.判断是否有变更
         id: determine_changes
-        run: |
-          git status
-          git status --porcelain
-          echo "changed=$(git status --porcelain | wc -l)" >> $GITHUB_OUTPUT
+        uses: UnicornGlobal/has-changes-action@v1.0.11
       - name: 4.提交变更
-        if: steps.determine_changes.outputs.changed != 0
+        if: steps.determine_changes.outputs.changed == 1
         run: |
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
@@ -61,6 +59,7 @@ jobs:
     concurrency:
       group: ${{ github.ref }}
       cancel-in-progress: false
+    if: github.event.schedule == '24 5 * * *' # 北京时间 每天13:24
     runs-on: ubuntu-latest
     permissions:
       # Give the default GITHUB_TOKEN write permission to commit and push the added or changed files to the repository.
