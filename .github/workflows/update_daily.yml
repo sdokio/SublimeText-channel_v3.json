@@ -14,7 +14,6 @@ jobs:
     concurrency:
       group: ${{ github.ref }}
       cancel-in-progress: false # To cancel any previously pending (or currently running) job or workflow in the same concurrency group
-    if: github.event.schedule == '14 5 * * *' # 北京时间 每天13:14
     runs-on: ubuntu-latest
     permissions:
       # Give the default GITHUB_TOKEN write permission to commit and push the added or changed files to the repository.
@@ -62,7 +61,6 @@ jobs:
     concurrency:
       group: ${{ github.ref }}
       cancel-in-progress: false
-    if: github.event.schedule == '24 5 * * *' # 北京时间 每天13:24
     runs-on: ubuntu-latest
     permissions:
       # Give the default GITHUB_TOKEN write permission to commit and push the added or changed files to the repository.
